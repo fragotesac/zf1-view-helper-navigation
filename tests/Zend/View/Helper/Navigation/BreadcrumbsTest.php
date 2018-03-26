@@ -19,8 +19,8 @@
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  * @version    $Id$
  */
+
 require_once dirname(__FILE__) . '/TestAbstract.php';
-require_once 'Zend/View/Helper/Navigation/Breadcrumbs.php';
 
 /**
  * Tests Zend_View_Helper_Navigation_Breadcrumbs
@@ -228,12 +228,8 @@ class Zend_View_Helper_Navigation_BreadcrumbsTest
     {
         $this->_helper->setPartial(array('bc.phtml'));
 
-        try {
-            $this->_helper->render();
-            $this->fail(
-                '$partial was invalid, but no Zend_View_Exception was thrown');
-        } catch (Zend_View_Exception $e) {
-        }
+        $this->expectException(Zend_View_Exception::class);
+        $this->_helper->render();
     }
 
     public function testLastBreadcrumbShouldBeEscaped()

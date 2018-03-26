@@ -21,7 +21,6 @@
  */
 
 require_once dirname(__FILE__) . '/TestAbstract.php';
-require_once 'Zend/View/Helper/Navigation/Menu.php';
 
 /**
  * Tests Zend_View_Helper_Navigation_Menu
@@ -338,11 +337,8 @@ class Zend_View_Helper_Navigation_MenuTest
     {
         $this->_helper->setPartial(array('menu.phtml'));
 
-        try {
-            $this->_helper->render();
-            $this->fail('invalid $partial should throw Zend_View_Exception');
-        } catch (Zend_View_Exception $e) {
-        }
+        $this->expectException(Zend_View_Exception::class);
+        $this->_helper->render();
     }
 
     public function testSetMaxDepth()
@@ -604,9 +600,9 @@ class Zend_View_Helper_Navigation_MenuTest
         $this->_nav3->findOneBy('id', 'home')->setAccesskey('H');
         $this->_nav3->findOneBy('uri', 'contact')->setAccesskey('c');
         $this->_nav3->findOneBy('id', 'imprint')->setAccesskey('i');
-        
+
         $expected = $this->_getExpected('menu/accesskey.html');
-        
+
         $this->assertEquals($expected, $this->_helper->render($this->_nav3));
     }
 
@@ -616,10 +612,10 @@ class Zend_View_Helper_Navigation_MenuTest
     public function testExpandSiblingNodesOfActiveBranch()
     {
         $this->_helper->setExpandSiblingNodesOfActiveBranch(true);
- 
+
         $expected = $this->_getExpected('menu/expandbranch.html');
         $actual = $this->_helper->renderMenu();
- 
+
         $this->assertEquals($expected, $actual);
     }
 
@@ -629,10 +625,10 @@ class Zend_View_Helper_Navigation_MenuTest
     public function testExpandSiblingNodesOfActiveBranchWhenShowingOnlyActiveBranch()
     {
         $this->_helper->setExpandSiblingNodesOfActiveBranch(true)->setOnlyActiveBranch(true);
- 
+
         $expected = $this->_getExpected('menu/expandbranch_onlyactivebranch.html');
         $actual = $this->_helper->renderMenu();
- 
+
         $this->assertEquals($expected, $actual);
     }
 
