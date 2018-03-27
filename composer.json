@@ -15,12 +15,14 @@
         "diablomedia/zendframework1-acl": "^1.0.0",
         "diablomedia/zendframework1-config": "^1.0.0",
         "diablomedia/zendframework1-loader": "^1.0.0",
-        "diablomedia/zendframework1-navigation": "*",
+        "diablomedia/zendframework1-navigation": "^1.0.0",
         "diablomedia/zendframework1-registry": "^1.0.0",
         "diablomedia/zendframework1-translate": "^1.0.0",
         "diablomedia/zendframework1-uri": "^1.0.0",
         "diablomedia/zendframework1-validate-sitemap": "^1.0.0",
-        "diablomedia/zendframework1-view": "*"
+        "diablomedia/zendframework1-view": "^1.0.0",
+        "diablomedia/zendframework1-view-helper-url": "^1.0.0",
+        "diablomedia/zendframework1-view-helper-partial": "^1.0.0"
     },
     "autoload": {
         "psr-0": {
