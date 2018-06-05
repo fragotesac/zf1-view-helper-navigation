@@ -33,8 +33,7 @@ require_once dirname(__FILE__) . '/TestAbstract.php';
  * @group      Zend_View
  * @group      Zend_View_Helper
  */
-class Zend_View_Helper_Navigation_BreadcrumbsTest
-    extends Zend_View_Helper_Navigation_TestAbstract
+class Zend_View_Helper_Navigation_BreadcrumbsTest extends Zend_View_Helper_Navigation_TestAbstract
 {
     /**
      * Class name for view helper to test
@@ -83,7 +82,7 @@ class Zend_View_Helper_Navigation_BreadcrumbsTest
 
         $this->_helper->setContainer();
         $expected = $this->_getExpected('bc/default.html');
-        $actual = $this->_helper->render();
+        $actual   = $this->_helper->render();
 
         Zend_Registry::set(self::REGISTRY_KEY, $oldReg);
 
@@ -127,7 +126,7 @@ class Zend_View_Helper_Navigation_BreadcrumbsTest
         $this->_helper->setIndent(8);
 
         $expected = '        <a';
-        $actual = substr($this->_helper->render(), 0, strlen($expected));
+        $actual   = substr($this->_helper->render(), 0, strlen($expected));
 
         $this->assertEquals($expected, $actual);
     }
@@ -191,7 +190,7 @@ class Zend_View_Helper_Navigation_BreadcrumbsTest
         Zend_Registry::set('Zend_Translate', $translator);
 
         $expected = $this->_getExpected('bc/translated.html');
-        $actual = $this->_helper->render();
+        $actual   = $this->_helper->render();
 
         Zend_Registry::set('Zend_Translate', $oldReg);
 
@@ -243,7 +242,7 @@ class Zend_View_Helper_Navigation_BreadcrumbsTest
         ));
 
         $expected = 'Live &amp; Learn';
-        $actual = $this->_helper->setMinDepth(0)->render($container);
+        $actual   = $this->_helper->setMinDepth(0)->render($container);
 
         $this->assertEquals($expected, $actual);
     }
@@ -261,18 +260,18 @@ class Zend_View_Helper_Navigation_BreadcrumbsTest
                     'rel'   => 'nofollow',
                     'style' => 'font-weight: bold;',
                 ),
-                'pages'             => array(
+                'pages' => array(
                     array(
                         'label'             => 'Page 2',
                         'uri'               => 'p2',
                         'customHtmlAttribs' => array(
-                            'rel'   => 'nofollow',
+                            'rel' => 'nofollow',
                         ),
-                        'pages'             => array(
+                        'pages' => array(
                             array(
-                                'label'             => 'Page 3',
-                                'uri'               => 'p3',
-                                'active'            => true,
+                                'label'  => 'Page 3',
+                                'uri'    => 'p3',
+                                'active' => true,
                             ),
                         ),
                     ),

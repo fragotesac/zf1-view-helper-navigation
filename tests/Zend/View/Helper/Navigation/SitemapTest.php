@@ -33,8 +33,7 @@ require_once dirname(__FILE__) . '/TestAbstract.php';
  * @group      Zend_View
  * @group      Zend_View_Helper
  */
-class Zend_View_Helper_Navigation_SitemapTest
-    extends Zend_View_Helper_Navigation_TestAbstract
+class Zend_View_Helper_Navigation_SitemapTest extends Zend_View_Helper_Navigation_TestAbstract
 {
     protected $_front;
     protected $_oldRequest;
@@ -75,9 +74,9 @@ class Zend_View_Helper_Navigation_SitemapTest
         $_SERVER['SERVER_PORT'] = 80;
         $_SERVER['REQUEST_URI'] = '/';
 
-        $this->_front = Zend_Controller_Front::getInstance();
+        $this->_front      = Zend_Controller_Front::getInstance();
         $this->_oldRequest = $this->_front->getRequest();
-        $this->_oldRouter = $this->_front->getRouter();
+        $this->_oldRouter  = $this->_front->getRouter();
 
         $this->_front->resetInstance();
         $this->_front->setRequest(new Zend_Controller_Request_Http());
@@ -119,7 +118,7 @@ class Zend_View_Helper_Navigation_SitemapTest
     public function testNullingOutNavigation()
     {
         $this->_helper->setContainer();
-        $this->assertEquals(0, count($this->_helper->getContainer()));
+        $this->assertCount(0, $this->_helper->getContainer());
     }
 
     public function testAutoloadContainerFromRegistry()
@@ -133,7 +132,7 @@ class Zend_View_Helper_Navigation_SitemapTest
         $this->_helper->setContainer(null);
 
         $expected = $this->_getExpected('sitemap/default1.xml');
-        $actual = $this->_helper->render();
+        $actual   = $this->_helper->render();
 
         Zend_Registry::set(self::REGISTRY_KEY, $oldReg);
 
@@ -221,7 +220,8 @@ class Zend_View_Helper_Navigation_SitemapTest
         } catch (Zend_View_Exception $e) {
             $expected = sprintf(
                     'Encountered an invalid URL for Sitemap XML: "%s"',
-                    'http://w..');
+                    'http://w..'
+            );
             $actual = $e->getMessage();
             $this->assertEquals($expected, $actual);
             return;
@@ -289,7 +289,8 @@ class Zend_View_Helper_Navigation_SitemapTest
         } catch (Zend_View_Exception $e) {
             $expected = sprintf(
                     'Sitemap is invalid according to XML Schema at "%s"',
-                    Zend_View_Helper_Navigation_Sitemap::SITEMAP_XSD);
+                    Zend_View_Helper_Navigation_Sitemap::SITEMAP_XSD
+            );
             $actual = $e->getMessage();
             $this->assertEquals($expected, $actual);
             return;

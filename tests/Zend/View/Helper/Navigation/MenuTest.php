@@ -33,8 +33,7 @@ require_once dirname(__FILE__) . '/TestAbstract.php';
  * @group      Zend_View
  * @group      Zend_View_Helper
  */
-class Zend_View_Helper_Navigation_MenuTest
-    extends Zend_View_Helper_Navigation_TestAbstract
+class Zend_View_Helper_Navigation_MenuTest extends Zend_View_Helper_Navigation_TestAbstract
 {
     /**
      * Class name for view helper to test
@@ -67,7 +66,7 @@ class Zend_View_Helper_Navigation_MenuTest
     public function testNullingOutContainerInHelper()
     {
         $this->_helper->setContainer();
-        $this->assertEquals(0, count($this->_helper->getContainer()));
+        $this->assertCount(0, $this->_helper->getContainer());
     }
 
     public function testAutoloadingContainerFromRegistry()
@@ -81,7 +80,7 @@ class Zend_View_Helper_Navigation_MenuTest
         $this->_helper->setContainer(null);
 
         $expected = $this->_getExpected('menu/default1.html');
-        $actual = $this->_helper->render();
+        $actual   = $this->_helper->render();
 
         Zend_Registry::set(self::REGISTRY_KEY, $oldReg);
 
@@ -113,7 +112,7 @@ class Zend_View_Helper_Navigation_MenuTest
     {
         $rendered1 = $this->_getExpected('menu/default1.html');
         $rendered2 = $this->_getExpected('menu/default2.html');
-        $expected = array(
+        $expected  = array(
             'registered'       => $rendered1,
             'supplied'         => $rendered2,
             'registered_again' => $rendered1
@@ -145,7 +144,7 @@ class Zend_View_Helper_Navigation_MenuTest
         $this->_helper->setRole($acl['role']);
 
         $expected = $this->_getExpected('menu/acl.html');
-        $actual = $this->_helper->render();
+        $actual   = $this->_helper->render();
 
         $this->assertEquals($expected, $actual);
     }
@@ -158,7 +157,7 @@ class Zend_View_Helper_Navigation_MenuTest
         $this->_helper->setUseAcl(false);
 
         $expected = $this->_getExpected('menu/default1.html');
-        $actual = $this->_helper->render();
+        $actual   = $this->_helper->render();
 
         $this->assertEquals($expected, $actual);
     }
@@ -295,12 +294,11 @@ class Zend_View_Helper_Navigation_MenuTest
         Zend_Registry::set('Zend_Translate', $translator);
 
         $expected = $this->_getExpected('menu/translated.html');
-        $actual = $this->_helper->render();
+        $actual   = $this->_helper->render();
 
         Zend_Registry::set('Zend_Translate', $oldReg);
 
         $this->assertEquals($expected, $actual);
-
     }
 
     public function testDisablingTranslation()
@@ -318,7 +316,7 @@ class Zend_View_Helper_Navigation_MenuTest
         $this->_helper->setPartial('menu.phtml');
 
         $expected = $this->_getExpected('menu/partial.html');
-        $actual = $this->_helper->render();
+        $actual   = $this->_helper->render();
 
         $this->assertEquals($expected, $actual);
     }
@@ -328,7 +326,7 @@ class Zend_View_Helper_Navigation_MenuTest
         $this->_helper->setPartial(array('menu.phtml', 'default'));
 
         $expected = $this->_getExpected('menu/partial.html');
-        $actual = $this->_helper->render();
+        $actual   = $this->_helper->render();
 
         $this->assertEquals($expected, $actual);
     }
@@ -346,7 +344,7 @@ class Zend_View_Helper_Navigation_MenuTest
         $this->_helper->setMaxDepth(1);
 
         $expected = $this->_getExpected('menu/maxdepth.html');
-        $actual = $this->_helper->renderMenu();
+        $actual   = $this->_helper->renderMenu();
 
         $this->assertEquals($expected, $actual);
     }
@@ -356,7 +354,7 @@ class Zend_View_Helper_Navigation_MenuTest
         $this->_helper->setMinDepth(1);
 
         $expected = $this->_getExpected('menu/mindepth.html');
-        $actual = $this->_helper->renderMenu();
+        $actual   = $this->_helper->renderMenu();
 
         $this->assertEquals($expected, $actual);
     }
@@ -366,7 +364,7 @@ class Zend_View_Helper_Navigation_MenuTest
         $this->_helper->setMinDepth(1)->setMaxDepth(2);
 
         $expected = $this->_getExpected('menu/bothdepts.html');
-        $actual = $this->_helper->renderMenu();
+        $actual   = $this->_helper->renderMenu();
 
         $this->assertEquals($expected, $actual);
     }
@@ -376,7 +374,7 @@ class Zend_View_Helper_Navigation_MenuTest
         $this->_helper->setOnlyActiveBranch(true);
 
         $expected = $this->_getExpected('menu/onlyactivebranch.html');
-        $actual = $this->_helper->renderMenu();
+        $actual   = $this->_helper->renderMenu();
 
         $this->assertEquals($expected, $actual);
     }
@@ -386,7 +384,7 @@ class Zend_View_Helper_Navigation_MenuTest
         $this->_helper->setOnlyActiveBranch(true)->setRenderParents(false);
 
         $expected = $this->_getExpected('menu/onlyactivebranch_noparents.html');
-        $actual = $this->_helper->renderMenu();
+        $actual   = $this->_helper->renderMenu();
 
         $this->assertEquals($expected, $actual);
     }
@@ -396,7 +394,7 @@ class Zend_View_Helper_Navigation_MenuTest
         $this->_helper->setOnlyActiveBranch()->setMinDepth(1);
 
         $expected = $this->_getExpected('menu/onlyactivebranch_mindepth.html');
-        $actual = $this->_helper->renderMenu();
+        $actual   = $this->_helper->renderMenu();
 
         $this->assertEquals($expected, $actual);
     }
@@ -406,7 +404,7 @@ class Zend_View_Helper_Navigation_MenuTest
         $this->_helper->setOnlyActiveBranch()->setMaxDepth(2);
 
         $expected = $this->_getExpected('menu/onlyactivebranch_maxdepth.html');
-        $actual = $this->_helper->renderMenu();
+        $actual   = $this->_helper->renderMenu();
 
         $this->assertEquals($expected, $actual);
     }
@@ -416,7 +414,7 @@ class Zend_View_Helper_Navigation_MenuTest
         $this->_helper->setOnlyActiveBranch()->setMinDepth(1)->setMaxDepth(2);
 
         $expected = $this->_getExpected('menu/onlyactivebranch_bothdepts.html');
-        $actual = $this->_helper->renderMenu();
+        $actual   = $this->_helper->renderMenu();
 
         $this->assertEquals($expected, $actual);
     }
@@ -429,7 +427,7 @@ class Zend_View_Helper_Navigation_MenuTest
                       ->setRenderParents(false);
 
         $expected = $this->_getExpected('menu/onlyactivebranch_np_bd.html');
-        $actual = $this->_helper->renderMenu();
+        $actual   = $this->_helper->renderMenu();
 
         $this->assertEquals($expected, $actual);
     }
@@ -457,7 +455,7 @@ class Zend_View_Helper_Navigation_MenuTest
                       ->setRenderParents(false);
 
         $expected = $this->_getExpected('menu/onlyactivebranch_np_bd2.html');
-        $actual = $this->_helper->renderMenu();
+        $actual   = $this->_helper->renderMenu();
 
         $this->assertEquals($expected, $actual);
     }
@@ -470,7 +468,7 @@ class Zend_View_Helper_Navigation_MenuTest
                       ->setRenderParents(true);
 
         $expected = $this->_getExpected('menu/onlyactivebranch_noparents.html');
-        $actual = $this->_helper->renderSubMenu();
+        $actual   = $this->_helper->renderSubMenu();
 
         $this->assertEquals($expected, $actual);
     }
@@ -482,7 +480,7 @@ class Zend_View_Helper_Navigation_MenuTest
         );
 
         $expected = $this->_getExpected('menu/maxdepth.html');
-        $actual = $this->_helper->renderMenu(null, $options);
+        $actual   = $this->_helper->renderMenu(null, $options);
 
         $this->assertEquals($expected, $actual);
     }
@@ -494,7 +492,7 @@ class Zend_View_Helper_Navigation_MenuTest
         );
 
         $expected = $this->_getExpected('menu/mindepth.html');
-        $actual = $this->_helper->renderMenu(null, $options);
+        $actual   = $this->_helper->renderMenu(null, $options);
 
         $this->assertEquals($expected, $actual);
     }
@@ -507,7 +505,7 @@ class Zend_View_Helper_Navigation_MenuTest
         );
 
         $expected = $this->_getExpected('menu/bothdepts.html');
-        $actual = $this->_helper->renderMenu(null, $options);
+        $actual   = $this->_helper->renderMenu(null, $options);
 
         $this->assertEquals($expected, $actual);
     }
@@ -519,7 +517,7 @@ class Zend_View_Helper_Navigation_MenuTest
         );
 
         $expected = $this->_getExpected('menu/onlyactivebranch.html');
-        $actual = $this->_helper->renderMenu(null, $options);
+        $actual   = $this->_helper->renderMenu(null, $options);
 
         $this->assertEquals($expected, $actual);
     }
@@ -528,11 +526,11 @@ class Zend_View_Helper_Navigation_MenuTest
     {
         $options = array(
             'onlyActiveBranch' => true,
-            'renderParents' => false
+            'renderParents'    => false
         );
 
         $expected = $this->_getExpected('menu/onlyactivebranch_noparents.html');
-        $actual = $this->_helper->renderMenu(null, $options);
+        $actual   = $this->_helper->renderMenu(null, $options);
 
         $this->assertEquals($expected, $actual);
     }
@@ -540,12 +538,12 @@ class Zend_View_Helper_Navigation_MenuTest
     public function testOptionOnlyActiveBranchAndMinDepth()
     {
         $options = array(
-            'minDepth' => 1,
+            'minDepth'         => 1,
             'onlyActiveBranch' => true
         );
 
         $expected = $this->_getExpected('menu/onlyactivebranch_mindepth.html');
-        $actual = $this->_helper->renderMenu(null, $options);
+        $actual   = $this->_helper->renderMenu(null, $options);
 
         $this->assertEquals($expected, $actual);
     }
@@ -553,12 +551,12 @@ class Zend_View_Helper_Navigation_MenuTest
     public function testOptionOnlyActiveBranchAndMaxDepth()
     {
         $options = array(
-            'maxDepth' => 2,
+            'maxDepth'         => 2,
             'onlyActiveBranch' => true
         );
 
         $expected = $this->_getExpected('menu/onlyactivebranch_maxdepth.html');
-        $actual = $this->_helper->renderMenu(null, $options);
+        $actual   = $this->_helper->renderMenu(null, $options);
 
         $this->assertEquals($expected, $actual);
     }
@@ -566,13 +564,13 @@ class Zend_View_Helper_Navigation_MenuTest
     public function testOptionOnlyActiveBranchAndBothDepthsSpecified()
     {
         $options = array(
-            'minDepth' => 1,
-            'maxDepth' => 2,
+            'minDepth'         => 1,
+            'maxDepth'         => 2,
             'onlyActiveBranch' => true
         );
 
         $expected = $this->_getExpected('menu/onlyactivebranch_bothdepts.html');
-        $actual = $this->_helper->renderMenu(null, $options);
+        $actual   = $this->_helper->renderMenu(null, $options);
 
         $this->assertEquals($expected, $actual);
     }
@@ -580,14 +578,14 @@ class Zend_View_Helper_Navigation_MenuTest
     public function testOptionOnlyActiveBranchNoParentsAndBothDepthsSpecified()
     {
         $options = array(
-            'minDepth' => 2,
-            'maxDepth' => 2,
+            'minDepth'         => 2,
+            'maxDepth'         => 2,
             'onlyActiveBranch' => true,
-            'renderParents' => false
+            'renderParents'    => false
         );
 
         $expected = $this->_getExpected('menu/onlyactivebranch_np_bd.html');
-        $actual = $this->_helper->renderMenu(null, $options);
+        $actual   = $this->_helper->renderMenu(null, $options);
 
         $this->assertEquals($expected, $actual);
     }
@@ -614,7 +612,7 @@ class Zend_View_Helper_Navigation_MenuTest
         $this->_helper->setExpandSiblingNodesOfActiveBranch(true);
 
         $expected = $this->_getExpected('menu/expandbranch.html');
-        $actual = $this->_helper->renderMenu();
+        $actual   = $this->_helper->renderMenu();
 
         $this->assertEquals($expected, $actual);
     }
@@ -627,7 +625,7 @@ class Zend_View_Helper_Navigation_MenuTest
         $this->_helper->setExpandSiblingNodesOfActiveBranch(true)->setOnlyActiveBranch(true);
 
         $expected = $this->_getExpected('menu/expandbranch_onlyactivebranch.html');
-        $actual = $this->_helper->renderMenu();
+        $actual   = $this->_helper->renderMenu();
 
         $this->assertEquals($expected, $actual);
     }
@@ -829,7 +827,7 @@ class Zend_View_Helper_Navigation_MenuTest
     {
         $expected = $this->_getExpected('menu/parentclass_standard.html');
         $actual   = $this->_helper->renderMenu(
-            null ,
+            null,
             array(
                  'renderParentClass' => true,
             )
@@ -845,7 +843,7 @@ class Zend_View_Helper_Navigation_MenuTest
     {
         $expected = $this->_getExpected('menu/parentclass_custom.html');
         $actual   = $this->_helper->renderMenu(
-            null ,
+            null,
             array(
                  'renderParentClass' => true,
                  'parentClass'       => 'foo',

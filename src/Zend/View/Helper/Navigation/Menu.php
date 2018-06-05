@@ -29,8 +29,7 @@
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class Zend_View_Helper_Navigation_Menu
-    extends Zend_View_Helper_Navigation_HelperAbstract
+class Zend_View_Helper_Navigation_Menu extends Zend_View_Helper_Navigation_HelperAbstract
 {
     /**
      * CSS class to use for the ul element
@@ -467,8 +466,8 @@ class Zend_View_Helper_Navigation_Menu
 
         // get attribs for element
         $attribs = array(
-            'id'     => $page->getId(),
-            'title'  => $title,
+            'id'    => $page->getId(),
+            'title' => $title,
         );
 
         if (false === $this->getAddPageClassToLi()) {
@@ -510,8 +509,7 @@ class Zend_View_Helper_Navigation_Menu
 
         // Inner ident
         if (isset($options['innerIndent'])) {
-            $options['innerIndent'] =
-                $this->_getWhitespace($options['innerIndent']);
+            $options['innerIndent'] = $this->_getWhitespace($options['innerIndent']);
         } else {
             $options['innerIndent'] = $this->getInnerIndent();
         }
@@ -618,18 +616,19 @@ class Zend_View_Helper_Navigation_Menu
      * @param  bool                      $renderParentClass Render parent class?
      * @return string                                       rendered menu (HTML)
      */
-    protected function _renderDeepestMenu(Zend_Navigation_Container $container,
-                                          $ulClass,
-                                          $indent,
-                                          $innerIndent,
-                                          $minDepth,
-                                          $maxDepth,
-                                          $ulId,
-                                          $addPageClassToLi,
-                                          $activeClass,
-                                          $parentClass,
-                                          $renderParentClass)
-    {
+    protected function _renderDeepestMenu(
+        Zend_Navigation_Container $container,
+        $ulClass,
+        $indent,
+        $innerIndent,
+        $minDepth,
+        $maxDepth,
+        $ulId,
+        $addPageClassToLi,
+        $activeClass,
+        $parentClass,
+        $renderParentClass
+    ) {
         if (!$active = $this->findActive($container, $minDepth - 1, $maxDepth)) {
             return '';
         }
@@ -639,10 +638,10 @@ class Zend_View_Helper_Navigation_Menu
             if (!$active['page']->hasPages()) {
                 return '';
             }
-        } else if (!$active['page']->hasPages()) {
+        } elseif (!$active['page']->hasPages()) {
             // found pages has no children; render siblings
             $active['page'] = $active['page']->getParent();
-        } else if (is_int($maxDepth) && $active['depth'] + 1 > $maxDepth) {
+        } elseif (is_int($maxDepth) && $active['depth'] + 1 > $maxDepth) {
             // children are below max depth; render siblings
             $active['page'] = $active['page']->getParent();
         }
@@ -674,9 +673,9 @@ class Zend_View_Helper_Navigation_Menu
                 $liClass = $this->_htmlAttribs(
                     array('class' => $activeClass . ' ' . $subPage->getClass())
                 );
-            } else if ($subPage->isActive(true)) {
+            } elseif ($subPage->isActive(true)) {
                 $liClass = $this->_htmlAttribs(array('class' => $activeClass));
-            } else if ($addPageClassToLi) {
+            } elseif ($addPageClassToLi) {
                 $liClass = $this->_htmlAttribs(
                     array('class' => $subPage->getClass())
                 );
@@ -715,33 +714,36 @@ class Zend_View_Helper_Navigation_Menu
      * @param  bool                      $renderParentClass Render parent class?
      * @return string                                       rendered menu (HTML)
      */
-    protected function _renderMenu(Zend_Navigation_Container $container,
-                                   $ulClass,
-                                   $indent,
-                                   $innerIndent,
-                                   $minDepth,
-                                   $maxDepth,
-                                   $onlyActive,
-                                   $expandSibs,
-                                   $ulId,
-                                   $addPageClassToLi,
-                                   $activeClass,
-                                   $parentClass,
-                                   $renderParentClass)
-    {
+    protected function _renderMenu(
+        Zend_Navigation_Container $container,
+        $ulClass,
+        $indent,
+        $innerIndent,
+        $minDepth,
+        $maxDepth,
+        $onlyActive,
+        $expandSibs,
+        $ulId,
+        $addPageClassToLi,
+        $activeClass,
+        $parentClass,
+        $renderParentClass
+    ) {
         $html = '';
 
         // find deepest active
         if ($found = $this->findActive($container, $minDepth, $maxDepth)) {
-            $foundPage = $found['page'];
+            $foundPage  = $found['page'];
             $foundDepth = $found['depth'];
         } else {
             $foundPage = null;
         }
 
         // create iterator
-        $iterator = new RecursiveIteratorIterator($container,
-                            RecursiveIteratorIterator::SELF_FIRST);
+        $iterator = new RecursiveIteratorIterator(
+            $container,
+                            RecursiveIteratorIterator::SELF_FIRST
+        );
         if (is_int($maxDepth)) {
             $iterator->setMaxDepth($maxDepth);
         }
@@ -749,19 +751,19 @@ class Zend_View_Helper_Navigation_Menu
         // iterate container
         $prevDepth = -1;
         foreach ($iterator as $page) {
-            $depth = $iterator->getDepth();
+            $depth    = $iterator->getDepth();
             $isActive = $page->isActive(true);
             if ($depth < $minDepth || !$this->accept($page)) {
                 // page is below minDepth or not accepted by acl/visibilty
                 continue;
-            } else if ($expandSibs && $depth > $minDepth) {
+            } elseif ($expandSibs && $depth > $minDepth) {
                 // page is not active itself, but might be in the active branch
                 $accept = false;
                 if ($foundPage) {
                     if ($foundPage->hasPage($page)) {
                         // accept if page is a direct child of the active page
                         $accept = true;
-                    } else if ($page->getParent()->isActive(true)) {
+                    } elseif ($page->getParent()->isActive(true)) {
                         // page is a sibling of the active branch...
                         $accept = true;
                     }
@@ -769,14 +771,14 @@ class Zend_View_Helper_Navigation_Menu
                 if (!$isActive && !$accept) {
                     continue;
                 }
-            } else if ($onlyActive && !$isActive) {
+            } elseif ($onlyActive && !$isActive) {
                 // page is not active itself, but might be in the active branch
                 $accept = false;
                 if ($foundPage) {
                     if ($foundPage->hasPage($page)) {
                         // accept if page is a direct child of the active page
                         $accept = true;
-                    } else if ($foundPage->getParent()->hasPage($page)) {
+                    } elseif ($foundPage->getParent()->hasPage($page)) {
                         // page is a sibling of the active page...
                         if (!$foundPage->hasPages() ||
                             is_int($maxDepth) && $foundDepth + 1 > $maxDepth) {
@@ -793,7 +795,7 @@ class Zend_View_Helper_Navigation_Menu
             }
 
             // make sure indentation is correct
-            $depth   -= $minDepth;
+            $depth -= $minDepth;
             $myIndent = $indent . str_repeat($innerIndent, $depth * 2);
 
             if ($depth > $prevDepth) {
@@ -818,10 +820,10 @@ class Zend_View_Helper_Navigation_Menu
 
                 // Reset prefix for IDs
                 $this->_skipPrefixForId = $skipValue;
-            } else if ($prevDepth > $depth) {
+            } elseif ($prevDepth > $depth) {
                 // close li/ul tags until we're at current depth
                 for ($i = $prevDepth; $i > $depth; $i--) {
-                    $ind   = $indent . str_repeat($innerIndent, $i * 2);
+                    $ind = $indent . str_repeat($innerIndent, $i * 2);
                     $html .= $ind . $innerIndent . '</li>' . $this->getEOL();
                     $html .= $ind . '</ul>' . $this->getEOL();
                 }
@@ -865,9 +867,9 @@ class Zend_View_Helper_Navigation_Menu
 
         if ($html) {
             // done iterating container; close open ul/li tags
-            for ($i = $prevDepth+1; $i > 0; $i--) {
+            for ($i = $prevDepth + 1; $i > 0; $i--) {
                 $myIndent = $indent . str_repeat($innerIndent . $innerIndent, $i - 1);
-                $html    .= $myIndent . $innerIndent . '</li>' . $this->getEOL()
+                $html .= $myIndent . $innerIndent . '</li>' . $this->getEOL()
                          . $myIndent . '</ul>' . $this->getEOL();
             }
             $html = rtrim($html, $this->getEOL());
@@ -894,9 +896,10 @@ class Zend_View_Helper_Navigation_Menu
      *                                               controlling rendering
      * @return string                                rendered menu
      */
-    public function renderMenu(Zend_Navigation_Container $container = null,
-                               array $options = array())
-    {
+    public function renderMenu(
+        Zend_Navigation_Container $container = null,
+        array $options = array()
+    ) {
         if (null === $container) {
             $container = $this->getContainer();
         }
@@ -977,13 +980,14 @@ class Zend_View_Helper_Navigation_Menu
      *                                                  {@link getInnerIndent()}.
      * @return string                                   rendered content
      */
-    public function renderSubMenu(Zend_Navigation_Container $container = null,
-                                  $ulClass = null,
-                                  $indent = null,
-                                  $ulId   = null,
-                                  $addPageClassToLi = false,
-                                  $innerIndent = null)
-    {
+    public function renderSubMenu(
+        Zend_Navigation_Container $container = null,
+        $ulClass = null,
+        $indent = null,
+        $ulId = null,
+        $addPageClassToLi = false,
+        $innerIndent = null
+    ) {
         return $this->renderMenu($container, array(
             'indent'           => $indent,
             'innerIndent'      => $innerIndent,
@@ -1021,9 +1025,10 @@ class Zend_View_Helper_Navigation_Menu
      *
      * @throws Zend_View_Exception   When no partial script is set
      */
-    public function renderPartial(Zend_Navigation_Container $container = null,
-                                  $partial = null)
-    {
+    public function renderPartial(
+        Zend_Navigation_Container $container = null,
+        $partial = null
+    ) {
         if (null === $container) {
             $container = $this->getContainer();
         }
@@ -1048,8 +1053,8 @@ class Zend_View_Helper_Navigation_Menu
             if (count($partial) != 2) {
                 $e = new Zend_View_Exception(
                     'Unable to render menu: A view partial supplied as '
-                    .  'an array must contain two values: partial view '
-                    .  'script and module where script can be found'
+                    . 'an array must contain two values: partial view '
+                    . 'script and module where script can be found'
                 );
                 $e->setView($this->view);
                 throw $e;

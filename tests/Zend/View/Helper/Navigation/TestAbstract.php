@@ -32,8 +32,7 @@
  * @group      Zend_View
  * @group      Zend_View_Helper
  */
-abstract class Zend_View_Helper_Navigation_TestAbstract
-    extends PHPUnit\Framework\TestCase
+abstract class Zend_View_Helper_Navigation_TestAbstract extends PHPUnit\Framework\TestCase
 {
     const REGISTRY_KEY = 'Zend_Navigation';
 
@@ -91,7 +90,7 @@ abstract class Zend_View_Helper_Navigation_TestAbstract
 
         // read navigation config
         $this->_files = $cwd . '/_files';
-        $config = new Zend_Config_Xml($this->_files . '/navigation.xml');
+        $config       = new Zend_Config_Xml($this->_files . '/navigation.xml');
 
         // setup containers from config
         $this->_nav1 = new Zend_Navigation($config->get('nav_test1'));
@@ -103,7 +102,7 @@ abstract class Zend_View_Helper_Navigation_TestAbstract
         $view->setScriptPath($cwd . '/_files/mvc/views');
 
         // setup front
-        $front = Zend_Controller_Front::getInstance();
+        $front                   = Zend_Controller_Front::getInstance();
         $this->_oldControllerDir = $front->getControllerDirectory('test');
         $front->setControllerDirectory($cwd . '/_files/mvc/controllers');
 

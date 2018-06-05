@@ -33,8 +33,7 @@ require_once dirname(__FILE__) . '/TestAbstract.php';
  * @group      Zend_View
  * @group      Zend_View_Helper
  */
-class Zend_View_Helper_Navigation_NavigationTest
-    extends Zend_View_Helper_Navigation_TestAbstract
+class Zend_View_Helper_Navigation_NavigationTest extends Zend_View_Helper_Navigation_TestAbstract
 {
     /**
      * Class name for view helper to test
@@ -76,7 +75,7 @@ class Zend_View_Helper_Navigation_NavigationTest
 
         // result
         $expected = $this->_getExpected('menu/default1.html');
-        $actual = $this->_helper->render();
+        $actual   = $this->_helper->render();
 
         // teardown
         Zend_Registry::set(self::REGISTRY_KEY, $oldReg);
@@ -97,7 +96,7 @@ class Zend_View_Helper_Navigation_NavigationTest
         // setup
         $this->_helper->setContainer($this->_nav2);
         $expected = array(
-            'menu' => $this->_getExpected('menu/default2.html'),
+            'menu'        => $this->_getExpected('menu/default2.html'),
             'breadcrumbs' => $this->_getExpected('bc/default.html')
         );
         $actual = array();
@@ -139,7 +138,7 @@ class Zend_View_Helper_Navigation_NavigationTest
         $this->_helper->setRole($acl['role']);
 
         $expected = $this->_getExpected('menu/acl.html');
-        $actual = $this->_helper->render();
+        $actual   = $this->_helper->render();
 
         $this->assertEquals($expected, $actual);
     }
@@ -153,7 +152,7 @@ class Zend_View_Helper_Navigation_NavigationTest
         $this->_helper->setInjectAcl(false);
 
         $expected = $this->_getExpected('menu/default1.html');
-        $actual = $this->_helper->render();
+        $actual   = $this->_helper->render();
 
         $this->assertEquals($expected, $actual);
     }
@@ -163,7 +162,7 @@ class Zend_View_Helper_Navigation_NavigationTest
         $this->_helper->setTranslator($this->_getTranslator());
 
         $expected = $this->_getExpected('menu/translated.html');
-        $actual = $this->_helper->render();
+        $actual   = $this->_helper->render();
 
         $this->assertEquals($expected, $actual);
     }
@@ -174,7 +173,7 @@ class Zend_View_Helper_Navigation_NavigationTest
         $this->_helper->setInjectTranslator(false);
 
         $expected = $this->_getExpected('menu/default1.html');
-        $actual = $this->_helper->render();
+        $actual   = $this->_helper->render();
 
         $this->assertEquals($expected, $actual);
     }
@@ -183,7 +182,7 @@ class Zend_View_Helper_Navigation_NavigationTest
     {
         $expected = array(
             'breadcrumbs' => $this->_getExpected('bc/default.html'),
-            'menu' => $this->_getExpected('menu/default1.html')
+            'menu'        => $this->_getExpected('menu/default1.html')
         );
         $actual = array();
 

@@ -29,8 +29,7 @@
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class Zend_View_Helper_Navigation_Links
-    extends Zend_View_Helper_Navigation_HelperAbstract
+class Zend_View_Helper_Navigation_Links extends Zend_View_Helper_Navigation_HelperAbstract
 {
     /**#@+
      * Constants used for specifying which link types to find and render
@@ -136,9 +135,11 @@ class Zend_View_Helper_Navigation_Links
     public function __call($method, array $arguments = array())
     {
         if (@preg_match('/find(Rel|Rev)(.+)/', $method, $match)) {
-            return $this->findRelation($arguments[0],
-                                       strtolower($match[1]),
-                                       strtolower($match[2]));
+            return $this->findRelation(
+                $arguments[0],
+                strtolower($match[1]),
+                strtolower($match[2])
+            );
         }
 
         return parent::__call($method, $arguments);
@@ -217,9 +218,10 @@ class Zend_View_Helper_Navigation_Links
      * @param  Zend_Navigation_Page $page  page to find links for
      * @return array                       related pages
      */
-    public function findAllRelations(Zend_Navigation_Page $page,
-                                     $flag = null)
-    {
+    public function findAllRelations(
+        Zend_Navigation_Page $page,
+        $flag = null
+    ) {
         if (!is_int($flag)) {
             $flag = self::RENDER_ALL;
         }
@@ -228,7 +230,7 @@ class Zend_View_Helper_Navigation_Links
         $native = array_values(self::$_RELATIONS);
 
         foreach (array_keys($result) as $rel) {
-            $meth = 'getDefined' . ucfirst($rel);
+            $meth  = 'getDefined' . ucfirst($rel);
             $types = array_merge($native, array_diff($page->$meth(), $native));
 
             foreach ($types as $type) {
@@ -267,7 +269,8 @@ class Zend_View_Helper_Navigation_Links
         if (!in_array($rel, array('rel', 'rev'))) {
             $e = new Zend_View_Exception(sprintf(
                 'Invalid argument: $rel must be "rel" or "rev"; "%s" given',
-                $rel));
+                $rel
+            ));
             $e->setView($this->view);
             throw $e;
         }
@@ -374,10 +377,12 @@ class Zend_View_Helper_Navigation_Links
      */
     public function searchRelNext(Zend_Navigation_Page $page)
     {
-        $found = null;
-        $break = false;
-        $iterator = new RecursiveIteratorIterator($this->_findRoot($page),
-                RecursiveIteratorIterator::SELF_FIRST);
+        $found    = null;
+        $break    = false;
+        $iterator = new RecursiveIteratorIterator(
+            $this->_findRoot($page),
+            RecursiveIteratorIterator::SELF_FIRST
+        );
         foreach ($iterator as $intermediate) {
             if ($intermediate === $page) {
                 // current page; break at next accepted page
@@ -407,11 +412,12 @@ class Zend_View_Helper_Navigation_Links
      */
     public function searchRelPrev(Zend_Navigation_Page $page)
     {
-        $found = null;
-        $prev = null;
+        $found    = null;
+        $prev     = null;
         $iterator = new RecursiveIteratorIterator(
                 $this->_findRoot($page),
-                RecursiveIteratorIterator::SELF_FIRST);
+                RecursiveIteratorIterator::SELF_FIRST
+        );
         foreach ($iterator as $intermediate) {
             if (!$this->accept($intermediate)) {
                 continue;
@@ -705,7 +711,8 @@ class Zend_View_Helper_Navigation_Links
         if (!in_array($attrib, array('rel', 'rev'))) {
             $e = new Zend_View_Exception(sprintf(
                     'Invalid relation attribute "%s", must be "rel" or "rev"',
-                    $attrib));
+                    $attrib
+            ));
             $e->setView($this->view);
             throw $e;
         }
@@ -717,9 +724,9 @@ class Zend_View_Helper_Navigation_Links
         // TODO: add more attribs
         // http://www.w3.org/TR/html401/struct/links.html#h-12.2
         $attribs = array(
-            $attrib  => $relation,
-            'href'   => $href,
-            'title'  => $page->getLabel()
+            $attrib => $relation,
+            'href'  => $href,
+            'title' => $page->getLabel()
         );
 
         return '<link' .
@@ -753,8 +760,8 @@ class Zend_View_Helper_Navigation_Links
             return '';
         }
 
-        $output = '';
-        $indent = $this->getIndent();
+        $output      = '';
+        $indent      = $this->getIndent();
         $this->_root = $container;
 
         $result = $this->findAllRelations($active, $this->getRenderFlag());

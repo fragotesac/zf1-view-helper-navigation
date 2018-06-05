@@ -29,9 +29,7 @@
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-abstract class Zend_View_Helper_Navigation_HelperAbstract
-    extends Zend_View_Helper_HtmlElement
-    implements Zend_View_Helper_Navigation_Helper
+abstract class Zend_View_Helper_Navigation_HelperAbstract extends Zend_View_Helper_HtmlElement implements Zend_View_Helper_Navigation_Helper
 {
     /**
      * Container to operate on by default
@@ -477,7 +475,7 @@ abstract class Zend_View_Helper_Navigation_HelperAbstract
         } else {
             $e = new Zend_View_Exception(sprintf(
                 '$role must be a string, null, or an instance of '
-                .  'Zend_Acl_Role_Interface; %s given',
+                . 'Zend_Acl_Role_Interface; %s given',
                 gettype($role)
             ));
             $e->setView($this->view);
@@ -599,7 +597,8 @@ abstract class Zend_View_Helper_Navigation_HelperAbstract
     {
         return call_user_func_array(
                 array($this->getContainer(), $method),
-                $arguments);
+                $arguments
+        );
     }
 
     /**
@@ -646,10 +645,11 @@ abstract class Zend_View_Helper_Navigation_HelperAbstract
      *                                               'page', or an empty array
      *                                               if not found
      */
-    public function findActive(Zend_Navigation_Container $container,
-                               $minDepth = null,
-                               $maxDepth = -1)
-    {
+    public function findActive(
+        Zend_Navigation_Container $container,
+        $minDepth = null,
+        $maxDepth = -1
+    ) {
         if (!is_int($minDepth)) {
             $minDepth = $this->getMinDepth();
         }
@@ -657,10 +657,12 @@ abstract class Zend_View_Helper_Navigation_HelperAbstract
             $maxDepth = $this->getMaxDepth();
         }
 
-        $found  = null;
+        $found      = null;
         $foundDepth = -1;
-        $iterator = new RecursiveIteratorIterator($container,
-                RecursiveIteratorIterator::CHILD_FIRST);
+        $iterator   = new RecursiveIteratorIterator(
+            $container,
+            RecursiveIteratorIterator::CHILD_FIRST
+        );
 
         foreach ($iterator as $page) {
             $currDepth = $iterator->getDepth();
@@ -671,7 +673,7 @@ abstract class Zend_View_Helper_Navigation_HelperAbstract
 
             if ($page->isActive(false) && $currDepth > $foundDepth) {
                 // found an active page at a deeper level than before
-                $found = $page;
+                $found      = $page;
                 $foundDepth = $currDepth;
             }
         }
@@ -849,8 +851,8 @@ abstract class Zend_View_Helper_Navigation_HelperAbstract
             return true;
         }
 
-        $role = $this->getRole();
-        $resource = $page->getResource();
+        $role      = $this->getRole();
+        $resource  = $page->getResource();
         $privilege = $page->getPrivilege();
 
         if ($resource || $privilege) {

@@ -29,8 +29,7 @@
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class Zend_View_Helper_Navigation_Breadcrumbs
-    extends Zend_View_Helper_Navigation_HelperAbstract
+class Zend_View_Helper_Navigation_Breadcrumbs extends Zend_View_Helper_Navigation_HelperAbstract
 {
     /**
      * Breadcrumbs separator string
@@ -242,9 +241,10 @@ class Zend_View_Helper_Navigation_Breadcrumbs
      *                                               be found.
      * @return string                                helper output
      */
-    public function renderPartial(Zend_Navigation_Container $container = null,
-                                  $partial = null)
-    {
+    public function renderPartial(
+        Zend_Navigation_Container $container = null,
+        $partial = null
+    ) {
         if (null === $container) {
             $container = $this->getContainer();
         }
@@ -264,7 +264,7 @@ class Zend_View_Helper_Navigation_Breadcrumbs
         // put breadcrumb pages in model
         $model = array('pages' => array());
         if ($active = $this->findActive($container)) {
-            $active = $active['page'];
+            $active           = $active['page'];
             $model['pages'][] = $active;
             while ($parent = $active->getParent()) {
                 if ($parent instanceof Zend_Navigation_Page) {
@@ -287,8 +287,8 @@ class Zend_View_Helper_Navigation_Breadcrumbs
             if (count($partial) != 2) {
                 $e = new Zend_View_Exception(
                     'Unable to render menu: A view partial supplied as '
-                    .  'an array must contain two values: partial view '
-                    .  'script and module where script can be found'
+                    . 'an array must contain two values: partial view '
+                    . 'script and module where script can be found'
                 );
                 $e->setView($this->view);
                 throw $e;
