@@ -353,7 +353,7 @@ abstract class Zend_View_Helper_Navigation_HelperAbstract extends Zend_View_Help
         if (null === $this->_prefixForId) {
             $prefix             = get_class($this);
             $this->_prefixForId = strtolower(
-                    trim(substr($prefix, strrpos($prefix, '_')), '_')
+                trim(substr($prefix, strrpos($prefix, '_')), '_')
                 ) . '-';
         }
 
@@ -596,8 +596,8 @@ abstract class Zend_View_Helper_Navigation_HelperAbstract extends Zend_View_Help
     public function __call($method, array $arguments = array())
     {
         return call_user_func_array(
-                array($this->getContainer(), $method),
-                $arguments
+            array($this->getContainer(), $method),
+            $arguments
         );
     }
 

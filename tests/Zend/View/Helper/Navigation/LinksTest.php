@@ -60,7 +60,7 @@ class Zend_View_Helper_Navigation_LinksTest extends Zend_View_Helper_Navigation_
         $this->_doctypeHelper = $this->_helper->view->doctype();
         $this->_oldDoctype    = $this->_doctypeHelper->getDoctype();
         $this->_doctypeHelper->setDoctype(
-                Zend_View_Helper_Doctype::HTML4_LOOSE
+            Zend_View_Helper_Doctype::HTML4_LOOSE
         );
 
         // disable all active pages

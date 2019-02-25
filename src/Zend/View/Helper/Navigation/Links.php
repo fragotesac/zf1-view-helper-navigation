@@ -415,8 +415,8 @@ class Zend_View_Helper_Navigation_Links extends Zend_View_Helper_Navigation_Help
         $found    = null;
         $prev     = null;
         $iterator = new RecursiveIteratorIterator(
-                $this->_findRoot($page),
-                RecursiveIteratorIterator::SELF_FIRST
+            $this->_findRoot($page),
+            RecursiveIteratorIterator::SELF_FIRST
         );
         foreach ($iterator as $intermediate) {
             if (!$this->accept($intermediate)) {
@@ -710,8 +710,8 @@ class Zend_View_Helper_Navigation_Links extends Zend_View_Helper_Navigation_Help
     {
         if (!in_array($attrib, array('rel', 'rev'))) {
             $e = new Zend_View_Exception(sprintf(
-                    'Invalid relation attribute "%s", must be "rel" or "rev"',
-                    $attrib
+                'Invalid relation attribute "%s", must be "rel" or "rev"',
+                $attrib
             ));
             $e->setView($this->view);
             throw $e;
