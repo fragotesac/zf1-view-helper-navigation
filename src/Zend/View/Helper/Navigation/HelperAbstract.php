@@ -354,7 +354,7 @@ abstract class Zend_View_Helper_Navigation_HelperAbstract extends Zend_View_Help
             $prefix             = get_class($this);
             $this->_prefixForId = strtolower(
                 trim(substr($prefix, strrpos($prefix, '_')), '_')
-                ) . '-';
+            ) . '-';
         }
 
         return $this->_prefixForId;
