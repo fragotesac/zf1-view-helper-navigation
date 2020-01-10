@@ -12,7 +12,7 @@
     "require": {
         "php": ">=7.0.0",
         "diablomedia/zendframework1-acl": "^1.0.0",
-        "diablomedia/zendframework1-config": "^1.0.0",
+        "diablomedia/zendframework1-config": "^1.0.0 || ^2.0.0",
         "diablomedia/zendframework1-loader": "^1.0.0",
         "diablomedia/zendframework1-navigation": "^1.0.0",
         "diablomedia/zendframework1-registry": "^1.0.2",
