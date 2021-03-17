@@ -54,7 +54,7 @@ class Zend_View_Helper_Navigation_SitemapTest extends Zend_View_Helper_Navigatio
      */
     protected $_helper;
 
-    protected function setUp()
+    protected function setUp(): void
     {
         date_default_timezone_set('Europe/Berlin');
 
@@ -87,7 +87,7 @@ class Zend_View_Helper_Navigation_SitemapTest extends Zend_View_Helper_Navigatio
         $this->_helper->setFormatOutput(true);
     }
 
-    protected function tearDown()
+    protected function tearDown(): void
     {
         if (null !== $this->_oldRequest) {
             $this->_front->setRequest($this->_oldRequest);
@@ -247,7 +247,7 @@ class Zend_View_Helper_Navigation_SitemapTest extends Zend_View_Helper_Navigatio
             $this->fail('An invalid server URL was given, but a ' .
                         'Zend_Uri_Exception was not thrown');
         } catch (Zend_Uri_Exception $e) {
-            $this->assertContains('Illegal scheme', $e->getMessage());
+            $this->assertStringContainsString('Illegal scheme', $e->getMessage());
         }
     }
 
