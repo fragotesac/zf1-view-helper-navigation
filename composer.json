@@ -42,10 +42,10 @@
     "require-dev": {
         "diablomedia/zendframework1-xml": "^1.0.5",
         "phpunit/phpunit": "^8.0",
-        "phpstan/phpstan": "0.12.82",
-        "friendsofphp/php-cs-fixer": "2.18.4",
-        "maglnet/composer-require-checker": "^1.1.0 || ^2.0.0",
-        "phpro/grumphp-shim": "^0.22.0 || ^1.1"
+        "phpstan/phpstan": "0.12.99",
+        "friendsofphp/php-cs-fixer": "3.2.1",
+        "maglnet/composer-require-checker": "^1.1.0 || ^2.0.0 || ^3.3.0",
+        "phpro/grumphp-shim": "^1.5"
     },
     "archive": {
         "exclude": [

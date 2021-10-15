@@ -6,8 +6,9 @@ $finder = PhpCsFixer\Finder::create()
     ->in(__DIR__)
 ;
 
-return PhpCsFixer\Config::create()
-    ->setRiskyAllowed(true)
+$config = new PhpCsFixer\Config();
+
+return $config->setRiskyAllowed(true)
     ->setRules(array(
         '@PSR2'                     => true,
         '@PHPUnit60Migration:risky' => true,
@@ -16,10 +17,10 @@ return PhpCsFixer\Config::create()
             'default'   => 'align_single_space_minimal',
             'operators' => array('||' => null, '&&' => null)
         ),
-        'single_quote' => true,
-        'array_syntax' => array('syntax' => 'long'),
-        'concat_space' => array('spacing' => 'one'),
-        'psr0'         => false
+        'single_quote'    => true,
+        'array_syntax'    => array('syntax' => 'long'),
+        'concat_space'    => array('spacing' => 'one'),
+        'psr_autoloading' => array('dir' => 'src'),
     ))
     ->setUsingCache(true)
     ->setFinder($finder);
